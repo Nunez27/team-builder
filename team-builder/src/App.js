@@ -1,22 +1,22 @@
 import './App.css';
-import Form from './components/Form'
-import Employee from './components/Employee'
+import Form from './Componets/Form'
+import Employee from './Componets/Empolyee';
 import React, { useState} from 'react'
 
-const friendsList = [
+const closeFriends = [
   {
-    name: 'Zachary',
-    email: 'thisRandomeemail@yahoo.com',
-    role: 'student'
+    name: 'Brian',
+    email: 'nunezthegoat@lol.com',
+    role: 'friend'
   },
   {
-    name: 'kyle',
-    email: 'Yooooooo@email.com',
-    role: 'teacher'
+    name: 'emily',
+    email: 'thequeen123@mycastle.com',
+    role: 'classmate'
   },
 ]
 
-const defaultFriend = {
+const resetFriend = {
   name: '',
   email: '',
   role: '',
@@ -25,43 +25,43 @@ const defaultFriend = {
 function App() {
 
 
-const [employee, setEmployee] = useState(friendsList);
+const [friend, setFriend] = useState(closeFriends);
 
 // make new friends
-const [list, setList] = useState(defaultFriend);
+const [list, setList] = useState(resetFriend);
 
-const updateForm = (inputName, inputValue) =>{
+const newForm = (inputName, inputValue) =>{
   setList({
     ...list, 
     [inputName]: inputValue,
   })
 };
 
-const submitForm = () =>{
-  const newFriend = {
+const formSubmitted = () =>{
+  const newClassMate = {
     name: list.name.trim(),
     email: list.email.trim(),
     role: list.role,
   }
 
-  if (!newFriend.name || !newFriend.email || !newFriend.role) {
+  if (!newClassMate.name || !newClassMate.email || !newClassMate.role) {
     return;
   }
-  setEmployee([newFriend, ...employee])
-  setList(defaultFriend)
+  setFriend([newClassMate, ...friend])
+  setList(resetFriend)
 };
 
   return (
     <div className='container'>
-      <h1>List of Team Members</h1>
+      <h1>These are the list of the boiisss!</h1>
 
       <Form 
       list={list} 
-      update={updateForm} 
-      submit={submitForm}
+      update={newForm} 
+      submit={formSubmitted}
       />
 
-      {employee.map((friend) => {
+      {friend.map((friend) => {
         return <Employee key = {friend.id} details={friend} />
       })}
     </div>

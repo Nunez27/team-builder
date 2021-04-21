@@ -3,20 +3,19 @@ import React from 'react'
 function Form (props) {
     const {list, update, submit} = props;
 
-    const onChange = evt => {
-        console.log(evt.target)
-        const {name, value} = evt.target;
+    const onChange = ev => {
+        const {name, value} = ev.target;
         update(name, value);
     }
 
-    const onSubmit = evt => {
-        evt.preventDefault();
+    const onSubmit = ev => {
+        ev.preventDefault();
         submit();
     }
 
     return (
-        <form className='form container' onSubmit={onSubmit}>
-            <div className='form-group inputs'>
+        <form className='container' onSubmit={onSubmit}>
+            <div className='inputs'>
                 <label>Name
                 <input
                     name='name'
@@ -44,10 +43,10 @@ function Form (props) {
                         name='role'
                         value={list.role}
                         onChange={onChange}>
-                            <option value=''>-- Select a Role --</option>
-                            <option value='backend engineer'>backend engineer</option>
-                            <option value='frontend engineer'>frontend engineer</option>
-                            <option value='designer'>designer</option>
+                            <option value=''>Who would you like to become?</option>
+                            <option value='Spiderman'>Spiderman</option>
+                            <option value='iron-man'>iron-man</option>
+                            <option value='Thor'>Thor</option>
                     </select>
                 </label>
 
@@ -58,3 +57,5 @@ function Form (props) {
     </form>
     )
 }
+
+export default Form;

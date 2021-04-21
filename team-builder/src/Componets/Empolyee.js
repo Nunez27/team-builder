@@ -1,8 +1,10 @@
+
+
 export default function Employee(props) {
     const { info } = props
 
     if (!info) {
-        return <h3>Working</h3>
+        return <h3>Processing</h3>
     }
 
     return (
