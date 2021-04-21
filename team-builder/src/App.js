@@ -1,23 +1,69 @@
-import logo from './logo.svg';
 import './App.css';
+import Form from './components/Form'
+import Employee from './components/Employee'
+import React, { useState} from 'react'
+
+const friendsList = [
+  {
+    name: 'Zachary',
+    email: 'thisRandomeemail@yahoo.com',
+    role: 'student'
+  },
+  {
+    name: 'kyle',
+    email: 'Yooooooo@email.com',
+    role: 'teacher'
+  },
+]
+
+const defaultFriend = {
+  name: '',
+  email: '',
+  role: '',
+}
 
 function App() {
+
+
+const [employee, setEmployee] = useState(friendsList);
+
+// make new friends
+const [list, setList] = useState(defaultFriend);
+
+const updateForm = (inputName, inputValue) =>{
+  setList({
+    ...list, 
+    [inputName]: inputValue,
+  })
+};
+
+const submitForm = () =>{
+  const newFriend = {
+    name: list.name.trim(),
+    email: list.email.trim(),
+    role: list.role,
+  }
+
+  if (!newFriend.name || !newFriend.email || !newFriend.role) {
+    return;
+  }
+  setEmployee([newFriend, ...employee])
+  setList(defaultFriend)
+};
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <h1>List of Team Members</h1>
+
+      <Form 
+      list={list} 
+      update={updateForm} 
+      submit={submitForm}
+      />
+
+      {employee.map((friend) => {
+        return <Employee key = {friend.id} details={friend} />
+      })}
     </div>
   );
 }
